@@ -36,10 +36,10 @@ class CNN(object):
             print(node)
 
         # Define input tensor
-        self.input = tf.placeholder(np.float32, shape = [None, 32, 32, 3], name='input_22')
-        self.dropout_rate = tf.placeholder(tf.float32, shape = [], name = 'dropout_rate_22')
+        self.input = tf.placeholder(np.float32, shape = [None, 32, 32, 3], name='input')
+        self.dropout_rate = tf.placeholder(tf.float32, shape = [], name = 'dropout_rate')
 
-        tf.import_graph_def(graph_def, {'input':self.input, 'dropout_rate':self.dropout_rate})
+        tf.import_graph_def(graph_def, {'input': self.input, 'dropout_rate': self.dropout_rate})
 
         print('Model loading complete!')
 

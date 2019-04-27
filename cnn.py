@@ -4,6 +4,12 @@ import os
 from tensorflow.python.tools import freeze_graph
 from tensorflow.python.framework import graph_util
 
+from tensorflow.python.saved_model import builder as saved_model_builder
+from tensorflow.python.saved_model import signature_def_utils
+from tensorflow.python.saved_model import signature_constants
+from tensorflow.python.saved_model import tag_constants
+from tensorflow.python.saved_model import utils as saved_model_utils
+
 class CNN(object):
 
     def __init__(self, input_size, num_classes, optimizer):
@@ -178,6 +184,21 @@ class CNN(object):
         filepath = os.path.join(directory, filename + '.ckpt')
         self.saver.save(self.sess, filepath)
         return filepath
+    
+    def save_signature(self, directory):
+
+        signature = signature_def_utils.build_signature_def(
+            inputs={'input': saved_model_utils.build_tensor_info(self.input), 'dropout_rate': saved_model_utils.build_tensor_info(self.dropout_rate)},
+            outputs={'output': saved_model_utils.build_tensor_info(self.output)},
+            method_name=signature_constants.PREDICT_METHOD_NAME)
+        signature_map = {signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY:
+                         signature}
+        model_builder = saved_model_builder.SavedModelBuilder(directory)
+        model_builder.add_meta_graph_and_variables(self.sess,
+            tags=[tag_constants.SERVING],
+            signature_def_map=signature_map,
+            clear_devices=True)
+        model_builder.save(as_text=False) 
 
     def save_as_pb(self, directory, filename):
 

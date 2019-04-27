@@ -71,6 +71,12 @@ def train(learning_rate, learning_rate_decay, dropout_rate, mini_batch_size, epo
     model.save_as_pb(directory = model_directory, filename = model_filename)
     print('Trained model saved as pb successfully')
 
+    # The directory should not exist before calling this method
+    signature_dir = os.path.join(model_directory, 'signature')
+    assert(not os.path.exists(signature_dir))
+    model.save_signature(directory = signature_dir)
+    print('Trained model with signature saved successfully')
+
     plot_curve(train_losses = train_loss_log, train_accuracies = train_accuracy_log, valid_accuracies = valid_accuracy_log, \
         filename = os.path.join(log_directory, 'training_curve.png'))
 

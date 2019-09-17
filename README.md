@@ -88,6 +88,11 @@ optional arguments:
 $ python test_pb.py
 ```
 
+## Update Log
+
+### 2019/9/16
+
+Replaced using the side effect of `tf.InteractiveSession` to set default graph for loading `graphdef` to using Python resource management `with` to set default graph for loading `graphdef`.
 
 
 ## Reference

@@ -24,7 +24,6 @@ class CNN(object):
         '''
         print('Loading model...')
         self.graph = tf.Graph()
-        self.sess = tf.InteractiveSession(graph = self.graph)
 
         with tf.gfile.GFile(model_filepath, 'rb') as f:
             graph_def = tf.GraphDef()
@@ -35,29 +34,33 @@ class CNN(object):
         for node in nodes:
             print(node)
 
-        # Define input tensor
-        self.input = tf.placeholder(np.float32, shape = [None, 32, 32, 3], name='input')
-        self.dropout_rate = tf.placeholder(tf.float32, shape = [], name = 'dropout_rate')
+        with self.graph.as_default():
+        	# Define input tensor
+        	self.input = tf.placeholder(np.float32, shape = [None, 32, 32, 3], name='input')
+        	self.dropout_rate = tf.placeholder(tf.float32, shape = [], name = 'dropout_rate')
+        	tf.import_graph_def(graph_def, {'input': self.input, 'dropout_rate': self.dropout_rate})
 
-        tf.import_graph_def(graph_def, {'input': self.input, 'dropout_rate': self.dropout_rate})
+        self.graph.finalize()
 
         print('Model loading complete!')
 
-        '''
         # Get layer names
         layers = [op.name for op in self.graph.get_operations()]
         for layer in layers:
             print(layer)
-        '''
-
-        '''
+        
+        """
         # Check out the weights of the nodes
         weight_nodes = [n for n in graph_def.node if n.op == 'Const']
         for n in weight_nodes:
             print("Name of the node - %s" % n.name)
-            print("Value - " )
-            print(tensor_util.MakeNdarray(n.attr['value'].tensor))
-        '''
+            # print("Value - " )
+            # print(tensor_util.MakeNdarray(n.attr['value'].tensor))
+        """
+
+        # In this version, tf.InteractiveSession and tf.Session could be used interchangeably. 
+        # self.sess = tf.InteractiveSession(graph = self.graph)
+        self.sess = tf.Session(graph = self.graph)
 
     def test(self, data):
 

@@ -4,7 +4,7 @@ Lei Mao
 
 ## Introduction
 
-This repository includes the examples of saving, loading, and running inference for frozen graph in TensorFlow 1.x and 2.x.
+This repository has the examples of saving, loading, and running inference for frozen graph in TensorFlow 1.x and 2.x.
 
 ## Files
 

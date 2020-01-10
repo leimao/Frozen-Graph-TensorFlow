@@ -27,7 +27,7 @@ This repository has the examples of saving, loading, and running inference for f
     └── utils.py
 ```
 
-## Blog
+## Blogs
 
 * [Save, Load and Inference From TensorFlow Frozen Graph](https://leimao.github.io/blog/Save-Load-Inference-From-TF-Frozen-Graph/)
 * [Save, Load and Inference From TensorFlow 2.x Frozen Graph](https://leimao.github.io/blog/Save-Load-Inference-From-TF2-Frozen-Graph/)

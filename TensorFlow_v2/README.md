@@ -77,7 +77,7 @@ The frozen graph could also be converted to UFF model for TensorRT using the fol
 convert-to-uff frozen_graph.pb -t -O Identity -o frozen_graph.uff
 ```
 
-TensorRT 6.0 Docker image could be pulled from [NVIDIA NGC](https://ngc.nvidia.com/)
+TensorRT 6.0 Docker image could be pulled from [NVIDIA NGC](https://ngc.nvidia.com/).
 
 ```
 $ docker pull nvcr.io/nvidia/tensorrt:19.12-py3

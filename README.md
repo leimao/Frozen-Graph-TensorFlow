@@ -1,4 +1,4 @@
-# TensorFlow Frozen Graph
+# Frozen Graph TensorFlow
 
 Lei Mao
 
@@ -34,5 +34,5 @@ This repository includes the examples of saving, loading, and running inference 
 
 ## Examples
 
-* [TensorFlow 1.x]()
-* [TensorFlow 2.x]()
+* [TensorFlow 1.x](https://github.com/leimao/Frozen_Graph_TensorFlow/tree/master/TensorFlow_v1)
+* [TensorFlow 2.x](https://github.com/leimao/Frozen_Graph_TensorFlow/tree/master/TensorFlow_v2)

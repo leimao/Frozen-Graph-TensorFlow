@@ -1,6 +1,7 @@
 from tensorflow import keras
 import numpy as np
 
+
 def get_fashion_mnist_data():
 
     fashion_mnist = keras.datasets.fashion_mnist

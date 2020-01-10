@@ -4,6 +4,7 @@ import numpy as np
 
 from utils import get_fashion_mnist_data
 
+
 # https://www.tensorflow.org/guide/migrate
 # https://www.tensorflow.org/api_docs/python/tf/graph_util/import_graph_def?version=stable
 def wrap_frozen_graph(graph_def, inputs, outputs, print_graph=False):
@@ -25,10 +26,11 @@ def wrap_frozen_graph(graph_def, inputs, outputs, print_graph=False):
         tf.nest.map_structure(import_graph.as_graph_element, inputs),
         tf.nest.map_structure(import_graph.as_graph_element, outputs))
 
+
 def main():
 
     (train_images, train_labels), (test_images,
-                                test_labels) = get_fashion_mnist_data()
+                                   test_labels) = get_fashion_mnist_data()
 
     # Load frozen graph using TensorFlow 1.x functions
     with tf.io.gfile.GFile("./frozen_models/frozen_graph.pb", "rb") as f:
@@ -37,9 +39,9 @@ def main():
 
     # Wrap frozen graph to ConcreteFunctions
     frozen_func = wrap_frozen_graph(graph_def=graph_def,
-                                inputs=["x:0"],
-                                outputs=["Identity:0"],
-                                print_graph=True)
+                                    inputs=["x:0"],
+                                    outputs=["Identity:0"],
+                                    print_graph=True)
 
     print("-" * 50)
     print("Frozen model inputs: ")
@@ -55,8 +57,7 @@ def main():
     print("Example prediction reference:")
     print(predictions[0].numpy())
 
+
 if __name__ == "__main__":
 
     main()
-
-

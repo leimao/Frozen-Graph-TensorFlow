@@ -1,4 +1,3 @@
-
 import tensorflow as tf
 import numpy as np
 import argparse
@@ -9,14 +8,14 @@ from tensorflow.python.framework import tensor_util
 
 # If load from pb, you may have to use get_tensor_by_name heavily.
 
-class CNN(object):
 
+class CNN(object):
     def __init__(self, model_filepath):
 
         # The file path of model
         self.model_filepath = model_filepath
         # Initialize the model
-        self.load_graph(model_filepath = self.model_filepath)
+        self.load_graph(model_filepath=self.model_filepath)
 
     def load_graph(self, model_filepath):
         '''
@@ -30,15 +29,25 @@ class CNN(object):
             graph_def.ParseFromString(f.read())
 
         print('Check out the input placeholders:')
-        nodes = [n.name + ' => ' +  n.op for n in graph_def.node if n.op in ('Placeholder')]
+        nodes = [
+            n.name + ' => ' + n.op for n in graph_def.node
+            if n.op in ('Placeholder')
+        ]
         for node in nodes:
             print(node)
 
         with self.graph.as_default():
-        	# Define input tensor
-        	self.input = tf.placeholder(np.float32, shape = [None, 32, 32, 3], name='input')
-        	self.dropout_rate = tf.placeholder(tf.float32, shape = [], name = 'dropout_rate')
-        	tf.import_graph_def(graph_def, {'input': self.input, 'dropout_rate': self.dropout_rate})
+            # Define input tensor
+            self.input = tf.placeholder(np.float32,
+                                        shape=[None, 32, 32, 3],
+                                        name='input')
+            self.dropout_rate = tf.placeholder(tf.float32,
+                                               shape=[],
+                                               name='dropout_rate')
+            tf.import_graph_def(graph_def, {
+                'input': self.input,
+                'dropout_rate': self.dropout_rate
+            })
 
         self.graph.finalize()
 
@@ -48,7 +57,6 @@ class CNN(object):
         layers = [op.name for op in self.graph.get_operations()]
         for layer in layers:
             print(layer)
-        
         """
         # Check out the weights of the nodes
         weight_nodes = [n for n in graph_def.node if n.op == 'Const']
@@ -58,15 +66,19 @@ class CNN(object):
             # print(tensor_util.MakeNdarray(n.attr['value'].tensor))
         """
 
-        # In this version, tf.InteractiveSession and tf.Session could be used interchangeably. 
+        # In this version, tf.InteractiveSession and tf.Session could be used interchangeably.
         # self.sess = tf.InteractiveSession(graph = self.graph)
-        self.sess = tf.Session(graph = self.graph)
+        self.sess = tf.Session(graph=self.graph)
 
     def test(self, data):
 
         # Know your output node name
         output_tensor = self.graph.get_tensor_by_name("import/cnn/output:0")
-        output = self.sess.run(output_tensor, feed_dict = {self.input: data, self.dropout_rate: 0})
+        output = self.sess.run(output_tensor,
+                               feed_dict={
+                                   self.input: data,
+                                   self.dropout_rate: 0
+                               })
 
         return output
 
@@ -87,22 +99,28 @@ def test_from_frozen_graph(model_filepath):
     x_test = x_test[0:500]
     y_test = y_test[0:500]
 
-    model = CNN(model_filepath = model_filepath)
+    model = CNN(model_filepath=model_filepath)
 
-    test_prediction_onehot = model.test(data = x_test)
-    test_prediction = np.argmax(test_prediction_onehot, axis = 1).reshape((-1,1))
-    test_accuracy = model_accuracy(label = y_test, prediction = test_prediction)
+    test_prediction_onehot = model.test(data=x_test)
+    test_prediction = np.argmax(test_prediction_onehot, axis=1).reshape(
+        (-1, 1))
+    test_accuracy = model_accuracy(label=y_test, prediction=test_prediction)
 
     print('Test Accuracy: %f' % test_accuracy)
+
 
 def main():
 
     model_pb_filepath_default = './model/cifar10_cnn.pb'
 
     # Argparser
-    parser = argparse.ArgumentParser(description = 'Load and test model from frozen graph pb file.')
+    parser = argparse.ArgumentParser(
+        description='Load and test model from frozen graph pb file.')
 
-    parser.add_argument('--model_pb_filepath', type = str, help = 'model pb-format frozen graph file filepath', default = model_pb_filepath_default)
+    parser.add_argument('--model_pb_filepath',
+                        type=str,
+                        help='model pb-format frozen graph file filepath',
+                        default=model_pb_filepath_default)
 
     argv = parser.parse_args()
 

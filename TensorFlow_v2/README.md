@@ -33,7 +33,7 @@ We would train a simple fully connected neural network to classify the Fashion M
 
 To train and export the model, please run the following command in the terminal.
 
-```
+```bash
 $ python train.py
 ```
 
@@ -66,20 +66,20 @@ Example prediction reference:
 If TensorFlow 1.x and `tf2onnx` have been installed, the frozen graph could be converted to ONNX model using the following command.
 
 ```bash
-python -m tf2onnx.convert --input ./frozen_models/frozen_graph.pb --output model.onnx --outputs Identity:0 --inputs x:0
+$ python -m tf2onnx.convert --input ./frozen_models/frozen_graph.pb --output model.onnx --outputs Identity:0 --inputs x:0
 ```
 
 ### Convert Frozen Graph to UFF
 
 The frozen graph could also be converted to UFF model for TensorRT using the following command. 
 
-```python
-convert-to-uff frozen_graph.pb -t -O Identity -o frozen_graph.uff
+```bash
+$ convert-to-uff frozen_graph.pb -t -O Identity -o frozen_graph.uff
 ```
 
 TensorRT 6.0 Docker image could be pulled from [NVIDIA NGC](https://ngc.nvidia.com/).
 
-```
+```bash
 $ docker pull nvcr.io/nvidia/tensorrt:19.12-py3
 ```
 

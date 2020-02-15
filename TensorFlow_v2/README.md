@@ -18,9 +18,6 @@ We use TensorFlow 2.1 Docker container from DockerHub. To download the Docker im
 $ docker pull tensorflow/tensorflow:2.1.0-gpu-py3
 ```
 
-Currently Google forgot to upload a TensorFlow 2.1 Docker image for Python 3.6 and GPU explicitly. I will change the Docker image to explicit tag instead of `latest` once Google fixed this.
-
-
 To start the Docker container, please run the following command in the terminal.
 
 ```bash

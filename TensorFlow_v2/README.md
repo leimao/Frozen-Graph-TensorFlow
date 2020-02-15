@@ -15,7 +15,7 @@ In this repository, a simple concrete example has been implemented to demonstrat
 We use TensorFlow 2.1 Docker container from DockerHub. To download the Docker image, please run the following command in the terminal.
 
 ```bash
-$ docker pull tensorflow/tensorflow:latest-gpu-py3
+$ docker pull tensorflow/tensorflow:2.1.0-gpu-py3
 ```
 
 Currently Google forgot to upload a TensorFlow 2.1 Docker image for Python 3.6 and GPU explicitly. I will change the Docker image to explicit tag instead of `latest` once Google fixed this.
@@ -24,7 +24,7 @@ Currently Google forgot to upload a TensorFlow 2.1 Docker image for Python 3.6 a
 To start the Docker container, please run the following command in the terminal.
 
 ```bash
-$ docker run --gpus all -it --rm -v $(pwd):/mnt tensorflow/tensorflow:latest-gpu-py3
+$ docker run --gpus all -it --rm -v $(pwd):/mnt tensorflow/tensorflow:2.1.0-gpu-py3
 ```
 
 ### Train and Export Model

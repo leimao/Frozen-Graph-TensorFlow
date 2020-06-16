@@ -32,11 +32,11 @@ def main():
                   metrics=["accuracy"])
 
     # Train model
-    model.fit(x=[train_images], y=[train_labels], epochs=1)
+    model.fit(x={"input": train_images}, y={"output": train_labels}, epochs=1)
 
     # Test model
-    test_loss, test_acc = model.evaluate(x=[test_images],
-                                         y=[test_labels],
+    test_loss, test_acc = model.evaluate(x={"input": test_images},
+                                         y={"output": test_labels},
                                          verbose=2)
     print("-" * 50)
     print("Test accuracy: ")
@@ -55,7 +55,7 @@ def main():
     # Convert Keras model to ConcreteFunction
     full_model = tf.function(lambda x: model(x))
     full_model = full_model.get_concrete_function(
-        tf.TensorSpec(model.inputs[0].shape, model.inputs[0].dtype))
+        x=tf.TensorSpec(model.inputs[0].shape, model.inputs[0].dtype))
 
     # Get frozen ConcreteFunction
     frozen_func = convert_variables_to_constants_v2(full_model)

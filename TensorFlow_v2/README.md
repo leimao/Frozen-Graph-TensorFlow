@@ -12,16 +12,16 @@ In this repository, a simple concrete example has been implemented to demonstrat
 
 ### Docker Container
 
-We use TensorFlow 2.1 Docker container from DockerHub. To download the Docker image, please run the following command in the terminal.
+We use TensorFlow 2.2 Docker container from DockerHub. To download the Docker image, please run the following command in the terminal.
 
 ```bash
-$ docker pull tensorflow/tensorflow:2.1.0-gpu-py3
+$ docker pull tensorflow/tensorflow:2.2.0-gpu
 ```
 
 To start the Docker container, please run the following command in the terminal.
 
 ```bash
-$ docker run --gpus all -it --rm -v $(pwd):/mnt tensorflow/tensorflow:2.1.0-gpu-py3
+$ docker run --gpus all -it --rm -v $(pwd):/mnt tensorflow/tensorflow:2.2.0-gpu
 ```
 
 ### Train and Export Model

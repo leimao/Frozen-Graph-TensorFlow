@@ -6,7 +6,7 @@ Lei Mao
 
 TensorFlow 1.x provided interface to freeze models via `tf.Session`. However, since TensorFlow 2.x removed `tf.Session`, freezing models in TensorFlow 2.x had been a problem to most of the users.
 
-In this repository, a simple concrete example has been implemented to demonstrate how to freeze models in TensorFlow 2.x. The frozen models are also fully compatible with inference using TensorFlow 1.x, TensorFlow 2.x, ONNX Runtime, and TensorRT. 
+In this repository, several simple concrete examples have been implemented to demonstrate how to freeze models and run inference using frozen models in TensorFlow 2.x. The frozen models are also fully compatible with inference using TensorFlow 1.x, TensorFlow 2.x, ONNX Runtime, and TensorRT. 
 
 ## Usages
 
@@ -24,38 +24,26 @@ To start the Docker container, please run the following command in the terminal.
 $ docker run --gpus all -it --rm -v $(pwd):/mnt tensorflow/tensorflow:2.2.0-gpu
 ```
 
-### Train and Export Model
+### Examples
 
-We would train a simple fully connected neural network to classify the Fashion MNIST data. The model would be saved as `SavedModel` in the `models` directory for completeness. In addition, the model would also be frozen and saved as `frozen_graph.pb` in the `frozen_models` directory.
+#### Example 1
 
-To train and export the model, please run the following command in the terminal.
+We would train a simple fully connected neural network to classify the Fashion MNIST data. The model would be saved as `SavedModel` in the `models/simple_model` directory for completeness. In addition, the model would also be frozen and saved as `simple_frozen_graph.pb` in the `frozen_models` directory.
 
-```bash
-$ python train.py
-```
-
-We would also have a reference value for the sample inference from TensorFlow 2.x using the conventional inference protocol in the printouts.
-
-```
-Example prediction reference:
-[3.9113933e-05 1.1972898e-07 5.2244545e-06 5.4371812e-06 6.1125693e-06
- 1.1335548e-01 3.0090479e-05 2.8483599e-01 9.5160649e-04 6.0077089e-01]
-```
-
-### Run Inference Using Frozen Graph
-
-To run inference using the frozen graph in TensorFlow 2.x, please run the following command in the terminal.
+To train, save, export, and run inference for the model, please run the following command in the terminal.
 
 ```bash
-$ python test.py
+$ python example_1.py
 ```
 
-We also got the value for the sample inference using frozen graph. It is (almost) exactly the same to the reference value we got using the conventional inference protocol. 
+#### Example 2
 
-```
-Example prediction reference:
-[3.9113860e-05 1.1972921e-07 5.2244545e-06 5.4371812e-06 6.1125752e-06
- 1.1335552e-01 3.0090479e-05 2.8483596e-01 9.5160597e-04 6.0077089e-01]
+We would train a simple recurrent neural network that has multiple inputs and outputs using random data. The model would be saved as `SavedModel` in the `models/complex_model` directory for completeness. In addition, the model would also be frozen and saved as `complex_frozen_graph.pb` in the `frozen_models` directory.
+
+To train, save, export, and run inference for the model, please run the following command in the terminal.
+
+```bash
+$ python example_2.py
 ```
 
 ### Convert Frozen Graph to ONNX

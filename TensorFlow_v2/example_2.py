@@ -76,7 +76,7 @@ def main():
     predictions_department = predictions[1]
 
     print("-" * 50)
-    print("Example TensorFlow frozen graph prediction reference:")
+    print("Example TensorFlow prediction reference:")
     print(predictions_priority)
     print(predictions_department)
 

@@ -21,9 +21,9 @@ This repository has the examples of saving, loading, and running inference for f
 │   ├── test_pb.py
 │   └── utils.py
 └── TensorFlow_v2
+    ├── example_1.py
+    ├── example_2.py
     ├── README.md
-    ├── test.py
-    ├── train.py
     └── utils.py
 ```
 

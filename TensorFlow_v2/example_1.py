@@ -17,7 +17,6 @@ def main():
     # Create Keras model
     model = keras.Sequential(layers=[
         keras.layers.InputLayer(input_shape=(28, 28), name="input"),
-        keras.layers.InputLayer(input_shape=(28, 28), name="input2"),
         keras.layers.Flatten(input_shape=(28, 28), name="flatten"),
         keras.layers.Dense(128, activation="relu", name="dense"),
         keras.layers.Dense(10, activation="softmax", name="output")

@@ -12,16 +12,16 @@ In this repository, several simple concrete examples have been implemented to de
 
 ### Docker Container
 
-We use TensorFlow 2.2 Docker container from DockerHub. To download the Docker image, please run the following command in the terminal.
+We use TensorFlow 2.3 Docker container from DockerHub. To download the Docker image, please run the following command in the terminal.
 
 ```bash
-$ docker pull tensorflow/tensorflow:2.2.0-gpu
+$ docker pull tensorflow/tensorflow:2.3.0-gpu
 ```
 
 To start the Docker container, please run the following command in the terminal.
 
 ```bash
-$ docker run --gpus all -it --rm -v $(pwd):/mnt tensorflow/tensorflow:2.2.0-gpu
+$ docker run --gpus all -it --rm -v $(pwd):/mnt tensorflow/tensorflow:2.3.0-gpu
 ```
 
 ### Examples

@@ -7,6 +7,12 @@ from utils import wrap_frozen_graph
 
 def main():
 
+    # Mysterious code
+    # https://leimao.github.io/blog/TensorFlow-cuDNN-Failure/
+    gpu_devices = tf.config.experimental.list_physical_devices('GPU')
+    for device in gpu_devices:
+        tf.config.experimental.set_memory_growth(device, True)
+
     # Dummy example copied from TensorFlow
     # https://www.tensorflow.org/guide/keras/functional#models_with_multiple_inputs_and_outputs
 
